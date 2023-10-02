@@ -1,5 +1,45 @@
+# SmartPlay
 
-# Contributing
+SmartPlay is a benchmark for Large Language Models (LLMs). It is designed to be easy to use, and to provide a wide variety of games to test agents on.
+
+Currently included games are:
+- Rock-Paper-Scissors
+- 2-armed bandit
+- Tower of Hanoi
+- [Messenger-EMMA](https://github.com/ahjwang/messenger-emma)
+- [Crafter](https://github.com/danijar/crafter)
+- [MineDojo Creative Tasks](https://github.com/MineDojo/MineDojo/tree/main)
+
+## Getting Started
+
+SmartPlay requires MineDojo, please follow the official [documentation](https://docs.minedojo.org/sections/getting_started/install.html#direct-install) to install MineDojo first before proceeding.
+
+Then run
+
+```
+pip install -e .
+```
+
+For completeness, we also provide conda environment scripts and requirements.txt in the root directory.
+
+## Using SmartPlay
+
+Guidelines to use the benchmark are provided in:
+
+```
+examples/experiments.py
+```
+
+To see all games available in the SmartPlay benchmark, run the following code:
+
+```
+import smartplay
+print(smartplay.env_list)
+```
+
+See [MineDojo Documentation](https://github.com/MineDojo/MineDojo/blob/main/minedojo/tasks/description_files/creative_tasks.yaml) for a description of the MineDojo Creative tasks.
+
+## Contributing
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -29,3 +69,4 @@ Privacy information can be found at https://privacy.microsoft.com/en-us/
 
 Microsoft and any contributors reserve all other rights, whether under their respective copyrights, patents,
 or trademarks, whether by implication, estoppel or otherwise.
+
