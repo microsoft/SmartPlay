@@ -1,0 +1,36 @@
+BasicGame block_size=2
+	SpriteSet
+		background > Immovable randomtiling=0.9 img=oryx/floor3 hidden=True
+		root >
+			enemy > Immovable stype=avatar speed=0.5 img=oryx/alien1
+			message > Fleeing stype=avatar speed=0.5 img=oryx/bear1
+			goal > Chaser stype=avatar speed=0.5 img=oryx/cyclop1
+			decoy_message > Chaser stype=avatar speed=0.5 img=oryx/bear1
+			decoy_goal > Fleeing stype=avatar speed=0.5 img=oryx/cyclop1
+			wall > Immovable img=oryx/wall11
+			avatar > MovingAvatar
+				no_message > img=oryx/swordman1_0
+				with_message > img=oryx/swordmankey1_0
+	InteractionSet
+		root wall > stepBack
+		root EOS > stepBack
+		avatar enemy > killSprite scoreChange=-1
+		avatar decoy_message > killSprite scoreChange=-1
+		avatar decoy_goal > killSprite scoreChange=-1
+		no_message goal > killSprite scoreChange=-1
+		no_message message > transformTo stype=with_message scoreChange=0.5
+		message avatar > killSprite
+		goal with_message > killSprite scoreChange=1
+	TerminationSet
+		SpriteCounter stype=avatar limit=0 win=False
+		SpriteCounter stype=goal limit=0 win=True
+	LevelMapping
+		. > background
+		E > background enemy
+		M > background message
+		G > background goal
+		X > background no_message
+		Y > background with_message
+		W > background wall
+		N > background decoy_message
+		H > background decoy_goal
