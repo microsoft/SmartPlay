@@ -100,7 +100,7 @@ packaging==23.1
 pandas==2.0.3
 pathtools==0.1.2
 peft==0.4.0
-Pillow==9.4.0
+Pillow==10.0.1
 pluggy==1.2.0
 praw==7.7.1
 prawcore==2.3.0
