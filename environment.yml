@@ -9,4 +9,6 @@ dependencies:
   - pytorch-cuda=11.8
   - torchaudio
   - pytorch
+  - wheel<0.40.0
+  - setuptools<67.0.0
 prefix: /anaconda/envs/SmartPlay
