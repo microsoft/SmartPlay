@@ -14,6 +14,8 @@ setuptools.setup(
     # package_data={'crafter': ['data.yaml', 'assets/*']},
     entry_points={'console_scripts': ['smartplay=smartplay.run_gui:main']},
     install_requires=[
+        'wheel<0.40.0'
+        'setuptools==66.0.0'
         'numpy', 
         'pygame', 
         'connected-components-3d', 
@@ -26,7 +28,6 @@ setuptools.setup(
         'importlib-metadata==6.6.0',
         'importlib-resources==5.12.0',
         'vgdl @ git+https://github.com/ahjwang/py-vgdl',
-        'pygame==1.9.6',
     ],
     include_package_data=True,
     classifiers=[
