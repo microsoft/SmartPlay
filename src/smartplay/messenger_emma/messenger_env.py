@@ -97,7 +97,7 @@ The name specifications of in-game objects may not be exact matches. Please try 
 """.strip()
 
     def _update_manual(self, manual):
-        self.desc = "{}\n\n{}\n\n{}\n\n{}".format(self.game_context, "\n".join(manual), self.advice, self.describe_act(self.action_list)).strip()
+        self.desc = "{}\n\n{}\n\n{}\n\n{}".format(self.game_context, "\n".join(manual), self.advice, describe_act(self.action_list)).strip()
 
     def describe(self, obs, action=None):
         if action is not None:
