@@ -26,7 +26,6 @@ setuptools.setup(
         'importlib-metadata==6.6.0',
         'importlib-resources==5.12.0',
         'vgdl @ git+https://github.com/ahjwang/py-vgdl',
-        'pygame==1.9.6',
     ],
     include_package_data=True,
     classifiers=[
