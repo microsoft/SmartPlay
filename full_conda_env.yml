@@ -82,7 +82,7 @@ dependencies:
   - pytorch-mutex=1.0=cuda
   - readline=8.2=h5eee18b_0
   - requests=2.31.0=py310h06a4308_0
-  - setuptools=68.0.0=py310h06a4308_0
+  - setuptools=66.0.0
   - sqlite=3.41.2=h5eee18b_0
   - sympy=1.11.1=py310h06a4308_0
   - tbb=2021.8.0=hdb19cb5_0
