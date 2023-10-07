@@ -1,6 +1,8 @@
 # SmartPlay
 
-SmartPlay is a benchmark for Large Language Models (LLMs). It is designed to be easy to use, and to provide a wide variety of games to test agents on.
+![SmartPlay Teaser](assets/img/teaser.png)
+
+The SmartPlay repository is a benchmark and methodology for evaluating the abilities of large language models (LLMs) as agents. It consists of six different games, including Rock-Paper-Scissors, Tower of Hanoi, and Minecraft, each featuring a unique setting that provides up to 20 evaluation settings and infinite environment variations. The games in SmartPlay challenge a subset of nine important capabilities of an intelligent LLM agent, including reasoning with object dependencies, planning ahead, spatial reasoning, learning from history, and understanding randomness. The distinction between the set of capabilities each game tests allows for the analysis of each capability separately. SmartPlay serves as a rigorous testing ground for evaluating the overall performance of LLM agents and as a roadmap for identifying gaps in current methodologies.
 
 Currently included games are:
 - Rock-Paper-Scissors
@@ -10,7 +12,22 @@ Currently included games are:
 - [Crafter](https://github.com/danijar/crafter)
 - [MineDojo Creative Tasks](https://github.com/MineDojo/MineDojo/tree/main)
 
-## Getting Started
+For more information, please refer to the [paper](https://arxiv.org/abs/2310.01557v2).
+
+## Table of Contents
+
+- [Introduction](#introduction)
+- [Games in SmartPlay](#games-in-smartplay)
+- [Getting Started](#getting-started)
+- [Using SmartPlay](#using-smartplay)
+- [Citing SmartPlay](#citing-smartplay)
+- [Contributing](#contributing)
+- [Legal Notices](#legal-notices)
+
+## Games in SmartPlay <a name="games-in-smartplay"></a>
+
+
+## Getting Started <a name="getting-started"></a>
 
 First consider setting up a conda environment by running 
 ```
@@ -27,7 +44,7 @@ pip install -e .
 
 For completeness, we also provide conda environment scripts and requirements.txt in the root directory.
 
-## Using SmartPlay
+## Using SmartPlay <a name="using-smartplay"></a>
 
 Guidelines to use the benchmark are provided in:
 
@@ -44,7 +61,19 @@ print(smartplay.env_list)
 
 See [MineDojo Documentation](https://github.com/MineDojo/MineDojo/blob/main/minedojo/tasks/description_files/creative_tasks.yaml) for a description of the MineDojo Creative tasks.
 
-## Contributing
+## Citing SmartPlay <a name="citing-smartplay"></a>
+```
+@misc{wu2023smartplay,
+      title={SmartPlay : A Benchmark for LLMs as Intelligent Agents}, 
+      author={Yue Wu and Xuan Tang and Tom M. Mitchell and Yuanzhi Li},
+      year={2023},
+      eprint={2310.01557},
+      archivePrefix={arXiv},
+      primaryClass={cs.LG}
+}
+```
+
+## Contributing <a name="contributing"></a>
 
 This project welcomes contributions and suggestions.  Most contributions require you to agree to a
 Contributor License Agreement (CLA) declaring that you have the right to, and actually do, grant us
@@ -58,7 +87,7 @@ This project has adopted the [Microsoft Open Source Code of Conduct](https://ope
 For more information see the [Code of Conduct FAQ](https://opensource.microsoft.com/codeofconduct/faq/) or
 contact [opencode@microsoft.com](mailto:opencode@microsoft.com) with any additional questions or comments.
 
-# Legal Notices
+# Legal Notices <a name="legal-notices"></a>
 
 Microsoft and any contributors grant you a license to the Microsoft documentation and other content
 in this repository under the [Creative Commons Attribution 4.0 International Public License](https://creativecommons.org/licenses/by/4.0/legalcode),
