@@ -12,6 +12,11 @@ Currently included games are:
 
 ## Getting Started
 
+First consider setting up a conda environment by running 
+```
+conda env create --name SmartPlay --file environment.yml
+```
+
 SmartPlay requires MineDojo, please follow the official [documentation](https://docs.minedojo.org/sections/getting_started/install.html#direct-install) to install MineDojo first before proceeding.
 
 Then run
