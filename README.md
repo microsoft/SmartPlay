@@ -25,7 +25,7 @@ For more information, please refer to the [paper](https://arxiv.org/abs/2310.015
 - [Legal Notices](#legal-notices)
 
 ## Games in SmartPlay <a name="games-in-smartplay"></a>
-
+![Games in SmartPlay](assets/figures/fig2.png)
 
 ## Getting Started <a name="getting-started"></a>
 
