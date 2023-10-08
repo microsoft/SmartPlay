@@ -156,7 +156,7 @@ class StageTwo(MessengerEnv):
         # choose the game variant (e.g. enmey-chasing, message-fleeing, goal-static)
         # and initial starting location of the entities.
         variant = random.choice(self.game_variants)
-        init_state = random.choice(self.init_states) # inital state file
+        init_state = random.choice(self.init_states) # initial state file
 
         # args that will go into VGDL Env.
         self._envargs = {
