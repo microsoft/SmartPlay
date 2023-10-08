@@ -150,16 +150,18 @@ class Crafter(Env):
         CTXT = CTXT.replace("Move Left: Flat ground left to the agent.", "Move West: Flat ground west of the agent.")
         CTXT = CTXT.replace("Move Right: Flat ground right to the agent.", "Move East: Flat ground east of the agent.")
         self.desc = CTXT
+        self.score_tracker = 0
         super().__init__(area, view, size, reward, length, seed)
 
     def reset(self):
         self.history.reset()
         super().reset()
         obs, reward, done, info = self.step(0)
+        self.score_tracker = 0 + sum([1. for k,v in info['achievements'].items() if v>0])
         info.update({'manual': self.desc,
                 'obs': describe_frame(info, None),
                 'history': self.history.describe(),
-                'score': sum([1. for k,v in info['achievements'].items() if v>0]),
+                'score': self.score_tracker,
                 'done': done,
                 'completed': 0,
                 })
@@ -168,10 +170,11 @@ class Crafter(Env):
     
     def step(self, action):
         obs, reward, done, info = super().step(action)
+        self.score_tracker = self.score_tracker + sum([1. for k,v in info['achievements'].items() if v>0])
         info.update({'manual': self.desc,
                 'obs': describe_frame(info, self.action_list[action]),
                 'history': self.history.describe(),
-                'score': sum([1. for k,v in info['achievements'].items() if v>0]),
+                'score': self.score_tracker,
                 'done': done,
                 'completed': 0,
                 })
