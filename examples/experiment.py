@@ -3,9 +3,11 @@ os.environ["MINEDOJO_HEADLESS"]="1"
 import argparse
 import numpy as np
 from tqdm import tqdm
+import gym
+import smartplay
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--llm_name', type=str, default='text-davinci-003', help='Name of the LLM')
+parser.add_argument('--llm_name', type=str, default='phi-2-nlp-new', help='Name of the LLM')
 parser.add_argument('--env_names', type=str, default=None, help='Comma separated list of environments to run')
 
 args = parser.parse_args()
@@ -15,7 +17,7 @@ if args.env_names is None:
 
 LLM_name = args.llm_name
 
-from unified_LLM_querying import get_query
+from llm_api import get_query
 query_model = get_query(LLM_name)
 
 def compose_ingame_prompt(info, question, past_qa=[]):
@@ -45,8 +47,6 @@ questions=[
         "Choose the best executable action from the list of all actions. Write the exact chosen action."
     ]
 
-import gym
-import smartplay
 def run(env_name):
     normalized_scores = []
     env = gym.make("smartplay:{}-v0".format(env_name))
@@ -63,7 +63,6 @@ def run(env_name):
             return 0
 
     rewards = []
-    steps = []
     progresses = []
     for eps in tqdm(range(num_iter), desc="Evaluating LLM {} on {}".format(LLM_name, env_name)):
         import wandb
@@ -125,10 +124,11 @@ def run(env_name):
         normalized_scores.append(smartplay.normalize_score(env_name, score))
         del wandb_table
         wandb.finish()
-    return normalized_scores
+    return np.average(normalized_scores)
 
 score_dict = {}
 for env_name in args.env_names.split(','):
     score_dict[env_name] = run(env_name)
 
-print(score_dict)
+print("Normalized scores on each task:", score_dict)
+print("Capability scores of the LLM:", smartplay.analyze_capabilities(score_dict))
