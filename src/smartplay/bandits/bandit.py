@@ -45,6 +45,7 @@ You are in the casino with 2 slot machines in front of you. Your goal is to try 
         self.history = HistoryTracker(max_steps)
 
         self._seed()
+        self.score_tracker = 0
 
     def _seed(self, seed=None):
         self.np_random, seed = seeding.np_random(seed)
@@ -62,8 +63,9 @@ You are in the casino with 2 slot machines in front of you. Your goal is to try 
             else:
                 reward = np.random.normal(self.r_dist[action][0], self.r_dist[action][1])
 
+        self.score_tracker+=int(action == self.optimal)
         info = {"obs": "You pulled slot machine {}, you received reward {}.".format(action+1, reward),
-                "score": int(action == self.optimal),
+                "score": self.score_tracker,
                 "manual": self.desc,
                 "history": self.history.describe(),
                 "optimal":self.optimal,
@@ -77,13 +79,14 @@ You are in the casino with 2 slot machines in front of you. Your goal is to try 
         idx_list = list(range(len(self.p_dist)))
         random.shuffle(idx_list)
 
+        self.score_tracker=0
         self.p_dist = [self.p_dist[i] for i in idx_list]
         self.r_dist = [self.r_dist[i] for i in idx_list]
         self.ev = [p*r - (1-p) for p, r in zip(self.p_dist, self.r_dist)]
         self.optimal = np.argmax(self.ev)
         self.history.reset()
         info = {"obs": "A new round begins.",
-                "score": 0,
+                "score": self.score_tracker,
                 "manual": self.desc,
                 "history": self.history.describe(),
                 "optimal":self.optimal,

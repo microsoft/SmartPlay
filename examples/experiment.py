@@ -3,21 +3,26 @@ os.environ["MINEDOJO_HEADLESS"]="1"
 import argparse
 import numpy as np
 from tqdm import tqdm
+import gym
+import smartplay
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--llm_name', type=str, default='text-davinci-003', help='Name of the LLM')
-parser.add_argument('--env_names', type=str, default='MinedojoCreative7-v0', help='Comma separated list of environments to run')
+parser.add_argument('--llm_name', type=str, default='gpt-4', help='Name of the LLM')
+parser.add_argument('--env_names', type=str, default=None, help='Comma separated list of environments to run')
 
 args = parser.parse_args()
 
+if args.env_names is None:
+    args.env_names = ','.join(smartplay.benchmark_games_v0)
+
 LLM_name = args.llm_name
 
-from unified_LLM_querying import get_query
+from llm_api import get_query
 query_model = get_query(LLM_name)
 
 def compose_ingame_prompt(info, question, past_qa=[]):
     messages = [
-    {"role": "system", "content" : "You’re a player trying to play the game."}
+        {"role": "system", "content" : "You’re a player trying to play the game."}
     ]
     
     if len(info['manual'])>0:
@@ -42,10 +47,9 @@ questions=[
         "Choose the best executable action from the list of all actions. Write the exact chosen action."
     ]
 
-import gym
-import smartplay
 def run(env_name):
-    env = gym.make("smartplay:{}".format(env_name))
+    normalized_scores = []
+    env = gym.make("smartplay:{}-v0".format(env_name))
     env_steps = env.default_steps
     num_iter = env.default_iter
 
@@ -59,7 +63,6 @@ def run(env_name):
             return 0
 
     rewards = []
-    steps = []
     progresses = []
     for eps in tqdm(range(num_iter), desc="Evaluating LLM {} on {}".format(LLM_name, env_name)):
         import wandb
@@ -70,19 +73,17 @@ def run(env_name):
         progress = [0]
         reward = 0
         rewards = []
-        scores = []
         done=False
 
-        columns=["Context", "Step", "OBS", "History", "Score", "Reward", "Total Score", "Total Reward"] + questions + ["Action"]
+        columns=["Context", "Step", "OBS", "History", "Score", "Reward", "Total Reward"] + questions + ["Action"]
         wandb_table = wandb.Table(columns=columns)
 
         _, info = env.reset()
         
         while step < env_steps:
 
-            new_row = [info['manual'], step, info['obs'], info['history'], info['score'], reward, sum(scores), sum(rewards)]
+            new_row = [info['manual'], step, info['obs'], info['history'], info['score'], reward, sum(rewards)]
             wandb.log({"metric/total_reward".format(eps): sum(rewards), 
-                       "metric/total_score".format(eps): sum(scores),
                        "metric/score".format(eps): info['score'],
                        "metric/reward".format(eps): reward,
                        })
@@ -102,7 +103,7 @@ def run(env_name):
             new_row.append(env.action_list[a])
             _, reward, done, info = env.step(a)
             rewards.append(reward)
-            scores.append(info['score'])
+            score=info['score']
 
             step += 1
             wandb_table.add_data(*new_row)
@@ -114,13 +115,20 @@ def run(env_name):
         progresses.append(np.max(progress))
         wandb.log({"rollout/rollout".format(eps): wandb_table, 
                 "final/total_reward":sum(rewards),
-                "final/total_score":sum(scores),
+                "final/score":score,
+                "final/normalized_score":smartplay.normalize_score(env_name, score),
                 "final/completion":completion,
                 "final/episodic_step":step,
                 "final/eps":eps,
                 })
+        normalized_scores.append(smartplay.normalize_score(env_name, score))
         del wandb_table
         wandb.finish()
+    return np.average(normalized_scores)
 
+score_dict = {}
 for env_name in args.env_names.split(','):
-    run(env_name)
+    score_dict[env_name] = run(env_name)
+
+print("Normalized scores on each task:", score_dict)
+print("Capability scores of the LLM:", smartplay.analyze_capabilities(score_dict))
