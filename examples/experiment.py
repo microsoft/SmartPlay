@@ -7,7 +7,7 @@ import gym
 import smartplay
 
 parser = argparse.ArgumentParser()
-parser.add_argument('--llm_name', type=str, default='phi-2-nlp-new', help='Name of the LLM')
+parser.add_argument('--llm_name', type=str, default='gpt-4', help='Name of the LLM')
 parser.add_argument('--env_names', type=str, default=None, help='Comma separated list of environments to run')
 
 args = parser.parse_args()
