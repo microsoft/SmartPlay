@@ -36,6 +36,7 @@ class RPSEnv(gym.Env):
         self.observation_space = spaces.Discrete(1)
         self.action_space = spaces.Discrete(len(self.probs))
         self.history = HistoryTracker(max_steps)
+        self.score_tracker = 0
 
         self._seed()
 
@@ -99,6 +100,7 @@ Your goal is to maximize your score.
         reward = self.reward[action] if result == "won" else -self.reward[opponent_action] if result == "lost" else 0
         done = False
         optimal_action, expected_score = self.compute_optimal_action()
+        self.score_tracker += int(action == optimal_action)
         info = {
             "obs": "You chose {}, and the opponent chose {}. You {} and received score {}.\nNew round begins.".format(
                 self.action_list[action], 
@@ -106,7 +108,7 @@ Your goal is to maximize your score.
                 result, reward),
             "manual": self.desc,
             "history": self.history.describe(),
-            "score": int(action==optimal_action),
+            "score": self.score_tracker,
             "result": result,
             "completed": 0,
             }
@@ -123,11 +125,12 @@ Your goal is to maximize your score.
         self.reward = [d[1] for d in dist]
         self._update_manual()
         self.history.reset()
+        self.score_tracker = 0
         info = {
             "obs":"New round begins.",
             "manual": self.desc,
             "history": self.history.describe(),
-            "score": 0,
+            "score": self.score_tracker,
             "completed": 0,
             }
         self.history.step(info)

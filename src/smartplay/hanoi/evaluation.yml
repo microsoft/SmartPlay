@@ -1,0 +1,17 @@
+challenges:
+  all:
+    Error/Mistake Handling: 2
+    Generalization: 1
+    Instruction Following: 2
+    Learning from Interaction: 1
+    Long Text: 2
+    Planning Ahead: 3
+    Randomness: 1
+    Reasoning w/ dependencies: 3
+    Spatial Reasoning: 1
+recorded settings:
+  Hanoi3Disk: 
+    iter: 10
+    steps: 30
+    human score: 3
+    min score: 0

@@ -1,0 +1,32 @@
+challenges:
+  MessengerL1:
+    Error/Mistake Handling: 1
+    Generalization: 2
+    Instruction Following: 2
+    Learning from Interaction: 1
+    Long Text: 3
+    Planning Ahead: 1
+    Randomness: 2
+    Reasoning w/ dependencies: 1
+    Spatial Reasoning: 2
+  all:
+    Error/Mistake Handling: 1
+    Generalization: 2
+    Instruction Following: 2
+    Learning from Interaction: 1
+    Long Text: 3
+    Planning Ahead: 2
+    Randomness: 2
+    Reasoning w/ dependencies: 2
+    Spatial Reasoning: 2
+recorded settings:
+  MessengerL1: 
+    iter: 100
+    steps: 4
+    human score: 1
+    min score: -1
+  MessengerL2: 
+    iter: 100
+    steps: 64
+    human score: 1
+    min score: -1

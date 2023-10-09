@@ -15,6 +15,7 @@ setuptools.setup(
     entry_points={'console_scripts': ['smartplay=smartplay.run_gui:main']},
     install_requires=[
         'numpy', 
+        'pandas',
         'pygame', 
         'connected-components-3d', 
         'gym', 
