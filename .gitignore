@@ -163,3 +163,4 @@ examples/logs
 examples/wandb
 
 .vscode
+wandb/
