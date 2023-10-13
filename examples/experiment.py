@@ -17,6 +17,9 @@ if args.env_names is None:
 
 LLM_name = args.llm_name
 
+# Replace with your own LLM API.
+# Note: query_model takes two arguments: 1) message in openai chat completion form (list of dictionaries), 
+#                                        2) an index to indicate where the message should be truncated if the length exceeds LLM context length.
 from llm_api import get_query
 query_model = get_query(LLM_name)
 
