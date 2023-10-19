@@ -281,8 +281,8 @@ def describe_entity(obs):
             distance = obs["rays"]["entity_distance"][index+1]
             if distance < min_distance:
                 min_distance = distance
-                yaw = ((col / yaw_cnt) * FOV - FOV/2 + my_yaw + 540) % 360 - 180
-                pitch = (row / pitch_cnt) * 180 - 90 + my_pitch
+                yaw = ((col / (yaw_cnt-1)) * FOV - FOV/2 + my_yaw + 540) % 360 - 180
+                pitch = (row / (pitch_cnt-1)) * 180 - 90 + my_pitch
                 direction = get_direction(yaw, pitch)
 
         amount_description = "taking {0:.0f}% of screen".format(amount/(pitch_cnt*yaw_cnt)*100)
@@ -347,8 +347,8 @@ def describe_obj(obs):
             distance = obs["rays"]["block_distance"][index+1]
             if distance < min_distance:
                 min_distance = distance
-                yaw = ((col / yaw_cnt) * FOV - FOV/2 + my_yaw + 540) % 360 - 180
-                pitch = ((row / pitch_cnt) * 180 - 90) + my_pitch
+                yaw = ((col / (yaw_cnt-1)) * FOV - FOV/2 + my_yaw + 540) % 360 - 180
+                pitch = ((row / (pitch_cnt-1)) * 180 - 90) + my_pitch
                 direction = get_direction(yaw, pitch)
         
         amount_description = "taking {0:.0f}% of screen".format(amount/(pitch_cnt*yaw_cnt)*100)
