@@ -368,7 +368,7 @@ def describe_location(obs):
     coord_list = obs["location_stats"]["pos"]
     
     # Describe the direction the agent is currently facing
-    yaw = obs["location_stats"]["yaw"] % 360
+    yaw = (obs["location_stats"]["yaw"]+180) % 360 - 180
     
     direction_list = ["north", "north-east", "east", "south-east", "south", "south-west", "west", "north-west"]
     direction_index = (int((yaw // 22.5) + 1)) // 2 # Calculate the index mapping to the direction_list above
