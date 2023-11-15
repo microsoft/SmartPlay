@@ -34,12 +34,12 @@ class HanoiEnv(gym.Env):
 
 
         self.action_list = [
-        "Move top disk of rod A to top of rod B",
-        "Move top disk of rod A to top of rod C",
-        "Move top disk of rod B to top of rod A",
-        "Move top disk of rod B to top of rod C",
-        "Move top disk of rod C to top of rod A",
-        "Move top disk of rod C to top of rod B",
+        "Move the top disk of rod A to the top of rod B",
+        "Move the top disk of rod A to the top of rod C",
+        "Move the top disk of rod B to the top of rod A",
+        "Move the top disk of rod B to the top of rod C",
+        "Move the top disk of rod C to the top of rod A",
+        "Move the top disk of rod C to the top of rod B",
         ]
       
         self.desc = """
