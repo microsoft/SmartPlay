@@ -3,11 +3,11 @@ challenges:
     Error/Mistake Handling: 1
     Generalization: 2
     Instruction Following: 1
-    Learning from Interaction: 2
-    Long Text: 1
-    Planning Ahead: 1
-    Randomness: 3
-    Reasoning w/ dependencies: 1
+    Learning from Interactions: 2
+    Long Text Understanding: 1
+    Planning: 1
+    Understanding the Odds: 3
+    Reasoning: 1
     Spatial Reasoning: 1
 recorded settings:
   BanditTwoArmedHighLowFixed: 
