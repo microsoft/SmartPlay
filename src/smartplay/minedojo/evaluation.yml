@@ -3,11 +3,11 @@ challenges:
     Error/Mistake Handling: 2
     Generalization: 3
     Instruction Following: 2
-    Learning from Interaction: 1
-    Long Text: 1
-    Planning Ahead: 1
-    Randomness: 2
-    Reasoning w/ dependencies: 1
+    Learning from Interactions: 1
+    Long Text Understanding: 1
+    Planning: 1
+    Understanding the Odds: 2
+    Reasoning: 1
     Spatial Reasoning: 3
 recorded settings:
   MinedojoCreative0: 
