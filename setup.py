@@ -9,7 +9,7 @@ setuptools.setup(
     url='',
     long_description=pathlib.Path('README.md').read_text(),
     long_description_content_type='text/markdown',
-    packages=setuptools.find_packages('src'),
+    packages=setuptools.find_namespace_packages('src'),
     package_dir={'': 'src'},
     # package_data={'crafter': ['data.yaml', 'assets/*']},
     entry_points={'console_scripts': ['smartplay=smartplay.run_gui:main']},
@@ -23,10 +23,11 @@ setuptools.setup(
         'imageio', 
         'pillow', 
         'opensimplex', 
-        'ruamel.yaml',
+        'ruamel.yaml<0.18', # safe_load removed in 0.18
         'importlib-metadata==6.6.0',
         'importlib-resources==5.12.0',
         'vgdl @ git+https://github.com/ahjwang/py-vgdl',
+        'setuptools', # pkg-resources required by vgdl
     ],
     include_package_data=True,
     classifiers=[

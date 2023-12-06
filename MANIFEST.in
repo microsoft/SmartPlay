@@ -1,3 +1,4 @@
-include *.pkl
-include *.yml
-ignore examples
+recursive-include src/ *.json *.pkl *.yml *.png *.yaml
+prune assets
+prune examples
+exclude *.yml
