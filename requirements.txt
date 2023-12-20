@@ -158,7 +158,7 @@ torch==2.0.1
 torchaudio==2.0.2
 torchvision==0.15.2
 tqdm==4.65.0
-transformers==4.31.0
+transformers==4.36.0
 triton==2.0.0
 typing_extensions
 tzdata==2023.3
