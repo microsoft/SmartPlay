@@ -12,7 +12,7 @@ Currently included games are:
 - [Crafter](https://github.com/danijar/crafter)
 - [MineDojo Creative Tasks](https://github.com/MineDojo/MineDojo/tree/main)
 
-For more information, please refer to the [paper](https://arxiv.org/abs/2310.01557v2).
+For more information, please refer to the [paper](https://arxiv.org/abs/2310.01557).
 
 ## Table of Contents
 
