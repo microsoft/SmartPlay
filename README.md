@@ -38,7 +38,7 @@ SmartPlay requires MineDojo, please follow the official [documentation](https://
 
 Then run
 
-```
+```bash
 pip install -e .
 ```
 
@@ -46,15 +46,32 @@ For completeness, we also provide conda environment scripts and requirements.txt
 
 ## Using SmartPlay <a name="using-smartplay"></a>
 
-Guidelines to use the benchmark are provided in:
+SmartPlay is designed to be used with OpenAI Gym:
+```python
+import gym
+import smartplay
+env = gym.make("smartplay:{}-v0".format(env_name))
+_, info = env.reset()
 
+while True:
+    action = info['action_space'].sample()
+    _, reward, done, info = env.step(action)
+    manual, obs, history, score = info['manual'], info['obs'], info['history'], info['score']
+    if not done:
+        completion=0
+    else:
+        completion=info['completed']
 ```
+
+Full example to use the benchmark are provided in:
+
+```python
 examples/experiments.py
 ```
 
-To see all games available in the SmartPlay benchmark, run the following code:
+To see all environments available in the SmartPlay benchmark, run the following code:
 
-```
+```python
 import smartplay
 print(smartplay.env_list)
 ```
@@ -63,13 +80,11 @@ See [MineDojo Documentation](https://github.com/MineDojo/MineDojo/blob/main/mine
 
 ## Citing SmartPlay <a name="citing-smartplay"></a>
 ```
-@misc{wu2023smartplay,
-      title={SmartPlay : A Benchmark for LLMs as Intelligent Agents}, 
-      author={Yue Wu and Xuan Tang and Tom M. Mitchell and Yuanzhi Li},
-      year={2023},
-      eprint={2310.01557},
-      archivePrefix={arXiv},
-      primaryClass={cs.LG}
+@inproceedings{wu2024smartplay,
+  title={SmartPlay: A Benchmark for LLMs as Intelligent Agents},
+  author={Wu, Yue and Tang, Xuan and Mitchell, Tom and Li, Yuanzhi},
+  booktitle={ICLR},
+  year={2024}
 }
 ```
 
